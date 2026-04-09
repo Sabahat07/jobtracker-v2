@@ -1,0 +1,22 @@
+import { Request, Response, NextFunction } from "express";
+import jwt from "jsonwebtoken";
+import { JWTPayload } from "../types";
+
+export interface AuthRequest extends Request {
+  user?: JWTPayload;
+}
+
+export const authenticate = (req: AuthRequest, res: Response, next: NextFunction): void => {
+  const auth = req.headers.authorization;
+  if (!auth?.startsWith("Bearer ")) {
+    res.status(401).json({ message: "No token provided" });
+    return;
+  }
+  try {
+    const secret = process.env.JWT_SECRET!;
+    req.user = jwt.verify(auth.split(" ")[1], secret) as JWTPayload;
+    next();
+  } catch {
+    res.status(401).json({ message: "Invalid or expired token" });
+  }
+};
