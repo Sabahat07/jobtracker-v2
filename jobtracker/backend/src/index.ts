@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import { authRouter, appRouter, aiRouter } from "./routes";
 
 dotenv.config();
+console.log("Environment:", process.env.NODE_ENV);
 
 const app = express();
 app.use(cors({ origin: process.env.CLIENT_URL || "http://localhost:5173", credentials: true }));
