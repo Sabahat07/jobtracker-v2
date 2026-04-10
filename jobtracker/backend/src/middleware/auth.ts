@@ -1,16 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { JWTPayload } from "../types";
-import express from "express";
-import { register, login, getMe } from "../controllers/auth";
 
-const router = express.Router();
-
-router.post("/register", register); //  MUST
-router.post("/login", login);       //  MUST
-router.get("/me", getMe);           // optional
-
-export default router;
 export interface AuthRequest extends Request {
   user?: JWTPayload;
 }
