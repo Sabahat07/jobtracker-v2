@@ -6,8 +6,8 @@ import { register, login, getMe } from "../controllers/auth";
 
 const router = express.Router();
 
-router.post("/register", register); // ✅ MUST
-router.post("/login", login);       // ✅ MUST
+router.post("/register", register); //  MUST
+router.post("/login", login);       //  MUST
 router.get("/me", getMe);           // optional
 
 export default router;
